@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" ng-app="testTaskApp">
+<head>
+  <meta charset="utf-8">
+  <title>EF - CTX QA Test Task</title>
+  <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body ng-controller="TestTaskController">
+
+  <div id="dashboard">
+    <div id="measurements">
+        <div id="gaugeContainer">
+          <div id="speed-gauge" class="gauge">
+            <canvas id="speed-gauge-canvas" gauge-value="{{currentSpeed}}" last-rendered-value="" render-updates="{{updateAirspeedGauge}}" width="200" height="200" min-value="{{config.minAirSpeed}}" max-value="{{config.maxAirSpeed}}" display-unit="1" pointers="1" large-pointer-unit="1" small-pointer-unit="1" indicator-decimals="0" indicator-unit="1" test-task-gauge></canvas>
+            <div class="label">Speed (ktas)</div>
+          </div>
+
+          <div id="altitude-gauge" class="gauge">
+            <canvas id="altitude-gauge-canvas"  gauge-value="{{currentAltitude}}" last-rendered-value="" render-updates="{{updateAltitudeGauge}}" width="200" height="200" min-value="{{config.minAltitude}}" max-value="{{config.maxAltitude}}"  display-unit="10000" pointers="2" large-pointer-unit="100" small-pointer-unit="10000" indicator-decimals="1" indicator-unit="1000"  test-task-gauge></canvas>
+            <div class="label">Altitude (feet)</div>
+          </div>
+        </div>
+        <div id="summary-graph-picker" class="slide-checkbox control-placeholder">
+            <input id="toggle-graph" name="toggle-landing-gear" type="checkbox" ng-model="isGraphVisible">
+            <label for="toggle-graph">
+            <span ng-show="isGraphVisible" style="display: none;">GRAPH</span>
+            <span ng-show="!isGraphVisible">SUMMARY</span>
+            </label>
+          </div>
+
+
+        <div id="telemetry-history-summary" ng-show="!isGraphVisible" ng-cloak>
+          <ul id="speed-history-summary">
+            <li>Min: {{telemetryHistorySummary.minAirSpeed}}</li>
+            <li>Max: {{telemetryHistorySummary.maxAirSpeed}}</li>
+            <li>Avg: {{telemetryHistorySummary.avgAirSpeed}}</li>
+          </ul>
+          <ul id="altitude-history-summary">
+            <li>Min: {{telemetryHistorySummary.minAltitude}}</li>
+            <li>Max: {{telemetryHistorySummary.maxAltitude}}</li>
+            <li>Avg: {{telemetryHistorySummary.avgAltitude}}</li>
+          </ul>
+        </div>
+
+        <div id="graph-container" ng-show="isGraphVisible" style="display: none;">
+          <canvas id="speed-history-graph" width="490" height="120" test-task-graph></canvas>
+        </div>
+
+      </div>
+
+      <div id="controls">
+
+        <div id="landingGear">
+          <div class="label">Landing gear</div>
+          <div class="slide-checkbox control-placeholder">
+            <input id="toggle-landing-gear" name="toggle-landing-gear" type="checkbox" ng-model="landingGearDeployed" ng-click="onLandingGearToggledByUser()">
+            <label for="toggle-landing-gear">
+            <span ng-show="landingGearDeployed" style="display: none;">ON</span>
+            <span ng-show="!landingGearDeployed">OFF</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="flaps">
+          <div class="label">Flaps</div>
+          <div class="control-placeholder">
+            <div test-task-slider="onFlapsValueChangedByUser" flap-levels="flapLevels"></div>
+          </div>
+          <ul id="flaps-values-hint" ng-cloak>
+            <li ng-repeat="flapsLevel in flapLevels" style="width: {{100/(config.maxFlaps + 1 - config.minFlaps)}}%;" ng-cloak>{{flapsLevel}}</li>
+          </ul>
+        </div>
+
+        <div id="connectionStatus">
+          <div class="label">Connection status</div>
+            <div class="control-placeholder" ng-show="connectionStatus == config.connectionStatus.connecting">
+              <div class="led led-yellow"></div>
+              <div class="status-description">Connecting</div>
+            </div>
+            <div class="control-placeholder" ng-show="connectionStatus == config.connectionStatus.open" style="display: none;">
+              <div class="led led-green"></div>
+              <div class="status-description">Connected</div>
+            </div>
+            <div class="control-placeholder" ng-show="connectionStatus == config.connectionStatus.closing" style="display: none;">
+              <div class="led led-yellow"></div>
+              <div class="status-description">Closing</div>
+            </div>
+            <div class="control-placeholder" ng-show="connectionStatus == config.connectionStatus.closed" style="display: none;">
+              <div class="led led-red"></div>
+              <div class="status-description">Closed</div>
+            </div>
+          <div>
+        </div>
+
+      </div>
+    </div>
+
+<div id="QA-controls">
+
+  <div id="QA-title">QA test task controls</div>
+
+  <div id="QA-render-airspeed">
+    <div class="label">Update speed gauge?</div>
+      <div class="slide-checkbox control-placeholder">
+      <input id="toggle-speed-gauge-update" name="toggle-speed-gauge-update" type="checkbox" ng-model="updateAirspeedGauge" checked>
+      <label for="toggle-speed-gauge-update">
+        <span ng-show="updateAirspeedGauge">ON</span>
+        <span ng-show="!updateAirspeedGauge" style="display: none;">OFF</span>
+      </label>
+    </div>
+  </div>
+
+  <div id="QA-render-altitude">
+    <div class="label">Update altitude gauge?</div>
+      <div class="slide-checkbox control-placeholder">
+      <input id="toggle-altitude-gauge-update" name="toggle-altitude-gauge-update" type="checkbox" ng-model="updateAltitudeGauge" checked>
+      <label for="toggle-altitude-gauge-update">
+        <span ng-show="updateAltitudeGauge">ON</span>
+        <span ng-show="!updateAltitudeGauge" style="display: none;">OFF</span>
+      </label>
+    </div>
+  </div>
+
+  <div id="QA-reconnect">
+    <div class="label">Reconnect on DC?</div>
+    <div class="slide-checkbox control-placeholder">
+      <input id="toggle-reconnection" name="toggle-reconnection" type="checkbox" ng-model="reconnectOnDisconnect" checked>
+      <label for="toggle-reconnection">
+        <span ng-show="reconnectOnDisconnect">ON</span>
+        <span ng-show="!reconnectOnDisconnect" style="display: none;">OFF</span>
+      </label>
+    </div>
+  </div>
+
+</div>
+
+  </div>
+  <script type="text/javascript">
+    var SOCKETSERVER = "<%= @socket_server %>";
+  </script>
+
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/directives.js"></script>
+
+</body>
+</html>
