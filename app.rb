@@ -9,4 +9,8 @@ class AircraftDashboard < Sinatra::Base
     @socket_server = settings.socket_server
     erb :index
   end
+
+  get '/socket-client' do
+    erb :socket_client
+  end
 end
