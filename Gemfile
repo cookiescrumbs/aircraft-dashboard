@@ -4,6 +4,6 @@ gem 'sinatra'
 gem 'thin'
 
 group :test do
-    gem 'cucumber'
-    gem 'capybara'
+  gem 'capybara'
+  gem 'cucumber'
 end
