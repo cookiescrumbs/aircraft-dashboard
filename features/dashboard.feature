@@ -12,18 +12,27 @@ Background:
         | altitude         | 18506  |
         | airspeed         | 212    |
     When the base station transmits the following parameters
-        | landing gear     | 0      |
-        | flaps            | 2      |
-        | altitude         | 18506  |
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
         | airspeed         | 100    |
 
-Scenario: Airspeed
+Scenario: Airspeed dial
     Then the airspeed dail will be point at 100
 
-# Scenario:
-#     Given context
-#     When event
-#     Then outcome
+Scenario: Altitude dial
+    Then the altitude dail will be pointing at 20000
+
+Scenario: Flaps gauge
+    Then the flaps gauge will be toggled to 4
+
+Scenario: Landing gear switch
+    Then the landing gear will be ON
+
+
+
+
+
 
 
 

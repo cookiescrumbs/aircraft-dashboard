@@ -26,3 +26,16 @@ end
 Then(/^the airspeed dail will be point at (\d+)$/) do |airspeed|
   expect(find(:css, '#speed-gauge-canvas')['gauge-value']).to eql airspeed
 end
+
+
+Then(/^the altitude dail will be pointing at (\d+)$/) do |altitude|
+  expect(find(:css, '#altitude-gauge-canvas')['gauge-value']).to eql altitude
+end
+
+Then(/^the flaps gauge will be toggled to (\d+)$/) do |flaps|
+  expect(find(:css, 'a.ui-slider-handle')['text']).to eql flaps
+end
+
+Then(/^the landing gear will be ON$/) do
+ #pending
+end
