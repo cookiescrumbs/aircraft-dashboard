@@ -3,6 +3,8 @@ require 'capybara/cucumber'
 require 'selenium/webdriver'
 require 'websocket-client-simple'
 require 'byebug'
+require 'rspec'
+
 
 @socket_server = ENV['SOCKET_SERVER'] = 'ws://localhost:3001'
 
