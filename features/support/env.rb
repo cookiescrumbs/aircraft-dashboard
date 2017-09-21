@@ -5,7 +5,6 @@ require 'websocket-client-simple'
 require 'byebug'
 require 'rspec'
 
-
 @socket_server = ENV['SOCKET_SERVER'] = 'ws://localhost:3001'
 
 Capybara.register_driver :selenium do |app|
