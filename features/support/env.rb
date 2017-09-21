@@ -3,13 +3,6 @@ require 'capybara/cucumber'
 require 'selenium/webdriver'
 require 'websocket-client-simple'
 require 'byebug'
-require 'rspec'
-
-RSpec.configure do |config|
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
-end
 
 @socket_server = ENV['SOCKET_SERVER'] = 'ws://localhost:3001'
 
