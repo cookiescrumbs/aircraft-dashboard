@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ./mock-socket-server
+gem install bundle
+bundle
+bundle exec ruby ./app.rb
