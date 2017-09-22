@@ -47,15 +47,3 @@ Scenario: Landing gear switch
         | altitude         | 20000  |
         | airspeed         | 100    |
     Then the landing gear will be "ON"
-
-
-
-
-
-
-
-
-
-
-
-
