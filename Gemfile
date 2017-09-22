@@ -8,7 +8,7 @@ group :test do
   gem 'capybara'
   gem 'chromedriver-helper'
   gem 'cucumber'
-  gem 'rspec'
+  gem 'rspec-expectations'
   gem 'selenium-webdriver'
   gem 'websocket-client-simple'
 end

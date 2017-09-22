@@ -15,7 +15,7 @@ Given(/^the base station transmits the following parameters$/) do |table|
     }
   }'
 
-  WebSocket::Client::Simple.connect 'ws://localhost:3001' do |ws|
+  WebSocket::Client::Simple.connect @socket_server do |ws|
     ws.on :open do
       ws.send message
       ws.close
