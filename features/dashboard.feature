@@ -47,3 +47,10 @@ Scenario: Landing gear switch
         | altitude         | 20000  |
         | airspeed         | 100    |
     Then the landing gear will be "ON"
+
+Scenario: User toggles the landing gear
+    Then the landing gear will be "OFF"
+    When the user flicks the landing gear switch
+    Then the landing gear will be "ON"
+    When the user flicks the landing gear switch
+    Then the landing gear will be "OFF"

@@ -40,3 +40,6 @@ Then(/^the landing gear will be "([^"]*)"$/) do |gear_state|
   expect(find(:css, "#landingGear .slide-checkbox label span").text).to eql gear_state
 end
 
+When(/^the user flicks the landing gear switch$/) do
+  find('[for=toggle-landing-gear]').click
+end
