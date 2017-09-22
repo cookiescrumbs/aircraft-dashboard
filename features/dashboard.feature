@@ -40,7 +40,13 @@ Scenario: Flaps gauge
     Then the flaps gauge will be toggled to 4
 
 Scenario: Landing gear switch
-    Then the landing gear will be ON
+    Then the landing gear will be "OFF"
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
+        | airspeed         | 100    |
+    Then the landing gear will be "ON"
 
 
 

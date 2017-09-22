@@ -36,6 +36,7 @@ Then(/^the flaps gauge will be toggled to (\d+)$/) do |flaps|
   expect(find(:css, 'a.ui-slider-handle')['text']).to eql flaps
 end
 
-Then(/^the landing gear will be ON$/) do
- #pending
+Then(/^the landing gear will be "([^"]*)"$/) do |gear_state|
+  expect(find(:css, "#landingGear .slide-checkbox label span").text).to eql gear_state
 end
+
