@@ -107,8 +107,8 @@ controller('TestTaskController', ['$scope', 'testTaskService', 'CONFIG', functio
             averageAirSpeed   = 0.0,
             averageAltitude   = 0.0;
         for(i = 0; i < totalMeasurements; i++) {
-            averageAirSpeed += measurement.telemetry.airspeed;
-            averageAltitude += measurement.telemetry.altitude;
+            averageAirSpeed += $scope.telemetryHistory[i].telemetry.airspeed;
+            averageAltitude += $scope.telemetryHistory[i].altitude;
         }
 
         $scope.telemetryHistorySummary.avgAirSpeed = averageAirSpeed / totalMeasurements;
