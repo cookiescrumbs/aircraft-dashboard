@@ -12,6 +12,46 @@ Background:
         | altitude         | 18506  |
         | airspeed         | 212    |
 
+Scenario: Gauge displaying the airspeed summary
+    Then the airspeed summary will contain the following values
+        | min              | 212    |
+        | max              | 212    |
+        | avg              | 212    |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
+        | airspeed         | 100    |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 18200  |
+        | airspeed         | 450    |
+    Then the airspeed summary will contain the following values
+        | min              | 100    |
+        | max              | 450    |
+        | avg              | 254    |
+
+Scenario: Gauge displaying the altitude summary
+    Then the altitude summary will contain the following values
+        | min              | 18506  |
+        | max              | 18506  |
+        | avg              | 18506  |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
+        | airspeed         | 100    |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 18200  |
+        | airspeed         | 450    |
+    Then the altitude summary will contain the following values
+        | min              | 18200    |
+        | max              | 20000    |
+        | avg              | 18902    |
+
 Scenario: Airspeed dial
     Then the airspeed dail will be point at 212
     When the base station transmits the following parameters
@@ -47,31 +87,6 @@ Scenario: Landing gear switch
         | altitude         | 20000  |
         | airspeed         | 100    |
     Then the landing gear will be "ON"
-
-Scenario: Gauge displaying the airspeed summary
-    Then the summary will contain the following values
-        | min              | 212    |
-        | max              | 212    |
-        | avg              | 212    |
-    When the base station transmits the following parameters
-        | landing gear     | 1      |
-        | flaps            | 4      |
-        | altitude         | 20000  |
-        | airspeed         | 100    |
-    When the base station transmits the following parameters
-        | landing gear     | 1      |
-        | flaps            | 4      |
-        | altitude         | 20000  |
-        | airspeed         | 450    |
-    When the base station transmits the following parameters
-        | landing gear     | 1      |
-        | flaps            | 4      |
-        | altitude         | 20000  |
-        | airspeed         | 500    |
-    Then the summary will contain the following values
-        | min              | 100    |
-        | max              | 500    |
-        | avg              | 315.5  |
 
 Scenario: User toggles the landing gear
     Then the landing gear will be "OFF"
