@@ -48,6 +48,31 @@ Scenario: Landing gear switch
         | airspeed         | 100    |
     Then the landing gear will be "ON"
 
+Scenario: Gauge displaying the airspeed summary
+    Then the summary will contain the following values
+        | min              | 212    |
+        | max              | 212    |
+        | avg              | 212    |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
+        | airspeed         | 100    |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
+        | airspeed         | 450    |
+    When the base station transmits the following parameters
+        | landing gear     | 1      |
+        | flaps            | 4      |
+        | altitude         | 20000  |
+        | airspeed         | 500    |
+    Then the summary will contain the following values
+        | min              | 100    |
+        | max              | 500    |
+        | avg              | 315.5  |
+
 Scenario: User toggles the landing gear
     Then the landing gear will be "OFF"
     When the user flicks the landing gear switch

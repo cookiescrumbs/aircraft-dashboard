@@ -43,3 +43,11 @@ end
 When(/^the user flicks the landing gear switch$/) do
   find('[for=toggle-landing-gear]').click
 end
+
+Then(/^the summary will contain the following values$/) do |table|
+  data = table.raw.to_h
+  speed_list = all(:css, 'ul#speed-history-summary li')
+  expect(speed_list[0].text).to eql "Min: #{data['min']}"
+  expect(speed_list[1].text).to eql "Max: #{data['max']}"
+  expect(speed_list[2].text).to eql "Avg: #{data['avg']}"
+end
