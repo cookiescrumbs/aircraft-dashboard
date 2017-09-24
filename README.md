@@ -5,7 +5,7 @@
 In order for me to write effective tests that didn't require me to change the JS application directly, I decided I would need to point the application to a mock socket server. 
 
 Having a mock socket server has enabled me to send JSON via a client connection in my Cucumber steps to the dashboard via the socket server.
-As well has sending data, I have tested against the messages received by the socket client and asserted expected outcomes when certain interactions are executed in the dashboard.
+As well as sending data, I have tested against the messages received by the socket client and asserted expected outcomes when certain interactions are executed in the dashboard.
 
 This setup has enabled me to test the dashboard application as a blackbox.
 
