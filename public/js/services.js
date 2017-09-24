@@ -101,14 +101,14 @@ angular.module('testTaskApp.services', [])
             if(newVal < CONFIG.minFlaps || newVal > CONFIG.maxFlaps)
                 return;
 
-            socket.send({ type: 'flaps', value: newVal });
+            socket.send(JSON.stringify({ type: 'flaps', value: newVal }));
         },
 
         setLandingGearDeployed: function (newVal) {
             if(typeof newVal != 'boolean')
                 return;
 
-            socket.send({ type: 'landing_gear', value: (newVal ? 1 : 0) });
+            socket.send(JSON.stringify({ type: 'landing_gear', value: (newVal ? 1 : 0) }));
         },
 
         getStatus: function() {

@@ -41,7 +41,18 @@ Then(/^the landing gear will be "([^"]*)"$/) do |gear_state|
 end
 
 When(/^the user flicks the landing gear switch$/) do
+  WebSocket::Client::Simple.connect @socket_server do |ws|
+    ws.on :open do
+      puts "open"
+    end
+
+    ws.on :message do |msg|
+      puts msg.data
+    end
+
+  end
   find('[for=toggle-landing-gear]').click
+
 end
 
 Then(/^the airspeed summary will contain the following values$/) do |table|
