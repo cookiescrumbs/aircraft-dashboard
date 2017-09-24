@@ -1,4 +1,4 @@
-Given(/^I load the dashboard$/) do
+Given(/^the operator loads the dashboard$/) do
   visit '/'
 end
 

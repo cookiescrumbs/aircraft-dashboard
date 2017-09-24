@@ -5,7 +5,7 @@ Feature: Aircraft Dashboard
     In order to monitor the airspeed, altitude, landing gear and flap adjustments of a remotely operated aircraft
 
 Background:
-    Given I load the dashboard
+    Given the operator loads the dashboard
     And the base station transmits the following parameters
         | landing gear     | 0      |
         | flaps            | 2      |
@@ -88,7 +88,7 @@ Scenario: Landing gear switch
         | airspeed         | 100    |
     Then the landing gear will be "ON"
 
-Scenario: User toggles the landing gear and the base station recieves a message
+Scenario: Operator toggles the landing gear and the base station recieves a message
     Then the landing gear will be "OFF"
     When the user flicks the landing gear switch "ON" and a message is sent to the base station
     Then the landing gear will be "ON"
