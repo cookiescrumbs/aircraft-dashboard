@@ -4,16 +4,17 @@ end
 
 Given(/^the base station transmits the following parameters$/) do |table|
   data = table.raw.to_h
-  message = '{
-    "control": {
-      "landing_gear": ' + data['landing gear'] +',
-      "flaps": ' + data['flaps'] + '
+
+  message =  {
+    control: {
+      landing_gear: data['landing gear'].to_i,
+      flaps: data['flaps'].to_i
     },
-    "telemetry": {
-      "altitude":  ' + data['altitude'] + ',
-      "airspeed": ' + data['airspeed'] + '
+    telemetry: {
+      altitude: data['altitude'].to_i,
+      airspeed: data['airspeed'].to_i
     }
-  }'
+  }.to_json
 
   WebSocket::Client::Simple.connect @socket_server do |ws|
     ws.on :open do
