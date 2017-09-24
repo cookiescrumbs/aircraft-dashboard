@@ -59,3 +59,12 @@ Then(/^the altitude summary will contain the following values$/) do |table|
   expect(speed_list[1].text).to eql "Max: #{data['max']}"
   expect(speed_list[2].text).to eql "Avg: #{data['avg']}"
 end
+
+When(/^the dashboard is disconnected to the base station$/) do
+  pending
+end
+
+Then(/^the dashboard is connected to the base station$/) do
+  byebug
+  pending # Write code here that turns the phrase above into concrete actions
+end

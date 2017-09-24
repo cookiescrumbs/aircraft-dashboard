@@ -94,3 +94,9 @@ Scenario: User toggles the landing gear
     Then the landing gear will be "ON"
     When the user flicks the landing gear switch
     Then the landing gear will be "OFF"
+
+Scenario: Reconnects to base station if there is a disconnection
+    And the dashboard is connected to the base station
+    When the dashboard is disconnected from the base station
+    Then the dashboard is connected to the base station
+
