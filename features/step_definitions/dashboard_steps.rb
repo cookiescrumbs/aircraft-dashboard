@@ -80,6 +80,32 @@ Then(/^the altitude summary will contain the following values$/) do |table|
   expect(speed_list[2].text).to eql "Avg: #{data['avg']}"
 end
 
+Then(/^the flaps will be at (\d+)$/) do |flap_number|
+  expect(find('.ui-slider-handle').text).to eql flap_number
+end
+
+When(/^the user slides the flaps to (\d+) and a message is sent to the base station$/) do |flap_number|
+
+  message = nil
+
+  WebSocket::Client::Simple.connect @socket_server do |ws|
+    ws.on :open do
+      puts "connected to mock-socket-server"
+    end
+
+    ws.on :message do |msg|
+      message = JSON.parse(msg.data)
+      puts "message recieved by mock-socket-server: #{message}"
+      ws.close
+    end
+  end
+
+  find(".ui-slider-handle").drag_by(50, 0)
+
+  expect(message["type"]).to eql "flaps"
+  expect(message["value"]).to eql flap_number.to_i
+end
+
 When(/^the dashboard is disconnected to the base station$/) do
   pending  # Write code here that turns the phrase above into concrete actions
 end

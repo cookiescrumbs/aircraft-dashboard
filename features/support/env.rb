@@ -1,5 +1,6 @@
 require 'capybara'
 require 'capybara/cucumber'
+require_relative 'capybara_extension.rb'
 require 'selenium/webdriver'
 require 'websocket-client-simple'
 require 'byebug'

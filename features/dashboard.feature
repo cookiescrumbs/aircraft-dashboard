@@ -95,7 +95,12 @@ Scenario: Operator toggles the landing gear and the base station recieves a mess
     When the user flicks the landing gear switch "OFF" and a message is sent to the base station
     Then the landing gear will be "OFF"
 
-# Scenario: Reconnects to base station if there is a disconnection
+Scenario: Operator slides the flaps slider and the base station recieves a message
+    Then the flaps will be at 2
+    When the user slides the flaps to 5 and a message is sent to the base station
+    Then the flaps will be at 5
+
+# Scenario: Conn
 #     And the dashboard is connected to the base station
 #     When the dashboard is disconnected from the base station
 #     Then the dashboard is connected to the base station
