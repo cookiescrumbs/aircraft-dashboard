@@ -1,5 +1,9 @@
 # Aircraft Dashboard
 
+![testing diagram](./dashboard-testing.png)
+
+I've used Ruby, Cucumber, Capbyara, Selenium and Chrome to test the dashboard.
+
 ```./start-mock-socket-server```
 
 
