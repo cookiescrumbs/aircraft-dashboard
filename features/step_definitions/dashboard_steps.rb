@@ -105,11 +105,3 @@ When(/^the user slides the flaps to (\d+) and a message is sent to the base stat
   expect(message["type"]).to eql "flaps"
   expect(message["value"]).to eql flap_number.to_i
 end
-
-When(/^the dashboard is disconnected to the base station$/) do
-  pending  # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the dashboard is connected to the base station$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end

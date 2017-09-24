@@ -100,8 +100,7 @@ Scenario: Operator slides the flaps slider and the base station recieves a messa
     When the user slides the flaps to 5 and a message is sent to the base station
     Then the flaps will be at 5
 
-# Scenario: Conn
-#     And the dashboard is connected to the base station
-#     When the dashboard is disconnected from the base station
-#     Then the dashboard is connected to the base station
+# Scenario: Reconnects to the base station if disconnected
+#   When the dashboard is disconnected from the base station
+#   Then the dashboard is reconnected to the base station
 
