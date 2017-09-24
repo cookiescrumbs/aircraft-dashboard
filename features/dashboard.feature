@@ -90,14 +90,14 @@ Scenario: Landing gear switch
 
 Scenario: Operator toggles the landing gear and the base station recieves a message
     Then the landing gear will be "OFF"
-    When the user flicks the landing gear switch "ON" and a message is sent to the base station
+    When the user flicks the landing gear switch "ON" a message is sent to the base station
     Then the landing gear will be "ON"
-    When the user flicks the landing gear switch "OFF" and a message is sent to the base station
+    When the user flicks the landing gear switch "OFF" a message is sent to the base station
     Then the landing gear will be "OFF"
 
 Scenario: Operator slides the flaps slider and the base station recieves a message
     Then the flaps will be at 2
-    When the user slides the flaps to 5 and a message is sent to the base station
+    When the user slides the flaps to 5 a message is sent to the base station
     Then the flaps will be at 5
 
 # Scenario: Reconnects to the base station if disconnected

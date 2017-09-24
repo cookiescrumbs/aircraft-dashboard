@@ -42,7 +42,7 @@ Then(/^the landing gear will be "([^"]*)"$/) do |gear_state|
   expect(find(:css, "#landingGear .slide-checkbox label span").text).to eql gear_state
 end
 
-When(/^the user flicks the landing gear switch "([^"]*)" and a message is sent to the base station$/) do |gear_state|
+When(/^the user flicks the landing gear switch "([^"]*)" a message is sent to the base station$/) do |gear_state|
 
   message = nil
 
@@ -84,7 +84,7 @@ Then(/^the flaps will be at (\d+)$/) do |flap_number|
   expect(find('.ui-slider-handle').text).to eql flap_number
 end
 
-When(/^the user slides the flaps to (\d+) and a message is sent to the base station$/) do |flap_number|
+When(/^the user slides the flaps to (\d+) a message is sent to the base station$/) do |flap_number|
 
   message = nil
 
