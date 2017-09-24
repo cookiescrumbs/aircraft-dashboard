@@ -26,7 +26,7 @@ Open another terminal window and cd into the root folder of this project and run
 
 You can view the dashboard by running the following ```SOCKET_SERVER=ws://localhost:3001 bundle exec thin start -p 8080``` in the terminal and going to http://localhost:8080 in a browser. 
 
-I've written a test client page so you can send data to the dahsboard and watch the dials change. You will also see the messages that are sent from the dashboard when you interact with the dashboard.
+I've written a test client page so you can send data to the dahsboard and watch the dials change. You will also see the messages that are sent from the dashboard when you interact with it.
 
 The test socket client can be found by visiting http://localhost:8080/socket-client
 
