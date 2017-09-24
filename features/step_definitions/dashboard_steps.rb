@@ -17,6 +17,7 @@ Given(/^the base station transmits the following parameters$/) do |table|
 
   WebSocket::Client::Simple.connect @socket_server do |ws|
     ws.on :open do
+      puts "connected to mock-socket-server"
       ws.send message
       ws.close
     end
@@ -40,19 +41,26 @@ Then(/^the landing gear will be "([^"]*)"$/) do |gear_state|
   expect(find(:css, "#landingGear .slide-checkbox label span").text).to eql gear_state
 end
 
-When(/^the user flicks the landing gear switch$/) do
+When(/^the user flicks the landing gear switch "([^"]*)" and a message is sent to the base station$/) do |gear_state|
+
+  message = nil
+
   WebSocket::Client::Simple.connect @socket_server do |ws|
     ws.on :open do
-      puts "open"
+      puts "connected to mock-socket-server"
     end
 
     ws.on :message do |msg|
-      puts msg.data
+      message = JSON.parse(msg.data)
+      puts "message recieved by mock-socket-server: #{message}"
+      ws.close
     end
-
   end
+
   find('[for=toggle-landing-gear]').click
 
+  expect(message["type"]).to eql "landing_gear"
+  expect(message["value"]).to eql (gear_state.eql? "OFF") ? 0 : 1
 end
 
 Then(/^the airspeed summary will contain the following values$/) do |table|
@@ -72,10 +80,9 @@ Then(/^the altitude summary will contain the following values$/) do |table|
 end
 
 When(/^the dashboard is disconnected to the base station$/) do
-  pending
+  pending  # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^the dashboard is connected to the base station$/) do
-  byebug
   pending # Write code here that turns the phrase above into concrete actions
 end
