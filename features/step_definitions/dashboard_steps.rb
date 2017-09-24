@@ -100,7 +100,7 @@ When(/^the user slides the flaps to (\d+) and a message is sent to the base stat
     end
   end
 
-  find(".ui-slider-handle").drag_by(50, 0)
+  find(".ui-slider-handle").drag_by(100, 0)
 
   expect(message["type"]).to eql "flaps"
   expect(message["value"]).to eql flap_number.to_i
